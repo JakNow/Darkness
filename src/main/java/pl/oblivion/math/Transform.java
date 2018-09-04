@@ -15,7 +15,7 @@ public class Transform {
     private Quaternionf rotation;
     private Vector3f scale;
 
-    public Transform(){
+    public Transform() {
         this.position = new Vector3f();
         this.rotation = new Quaternionf();
         this.scale = new Vector3f(1.0f);

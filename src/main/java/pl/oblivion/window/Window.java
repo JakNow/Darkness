@@ -12,12 +12,15 @@ import java.util.Properties;
 
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL11.glClearColor;
 import static org.lwjgl.system.MemoryStack.stackPush;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
 public class Window {
 
+    private static float FOV;
+    private static float NEAR;
+    private static float FAR;
     private final Matrix4f projectionMatrix;
     private long windowId;
     private String title;
@@ -25,11 +28,6 @@ public class Window {
     private int height;
     private boolean resized = false;
     private boolean vSync = true;
-
-    private static float FOV;
-    private static float NEAR;
-    private static float FAR;
-
     private FloatBuffer fb;
 
     public Window(Properties properties) {
@@ -42,7 +40,7 @@ public class Window {
 
         fb = BufferUtils.createFloatBuffer(16);
 
-        this.projectionMatrix = new Matrix4f().setPerspective(FOV,(float)this.width/this.height,NEAR,FAR);
+        this.projectionMatrix = new Matrix4f().setPerspective(FOV, (float) this.width / this.height, NEAR, FAR);
         init();
     }
 
@@ -130,7 +128,7 @@ public class Window {
         return width;
     }
 
-    public int getHeight(){
+    public int getHeight() {
         return height;
     }
 

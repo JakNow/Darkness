@@ -1,12 +1,13 @@
 package pl.oblivion.utils;
 
+import lombok.ToString;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import lombok.ToString;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
 
 @ToString
 public class MyFile {
@@ -15,13 +16,18 @@ public class MyFile {
     private String path;
     private String name;
 
-    public MyFile(String path){
+    public MyFile(String path) {
         this.path = path.startsWith(File.separator) ? path : File.separator.concat(path);
         this.name = setName(this.path);
         logger.info(this.toString());
     }
 
-    public MyFile(String... paths){
+    private String setName(String path) {
+        String[] dirs = path.split(File.separator);
+        return dirs[dirs.length - 1];
+    }
+
+    public MyFile(String... paths) {
         StringBuilder stringBuilder = new StringBuilder();
         for (String path : paths) {
             stringBuilder.append(File.separator.concat(path));
@@ -31,15 +37,10 @@ public class MyFile {
         logger.info(this.toString());
     }
 
-    public MyFile(MyFile myFile, String subFile){
+    public MyFile(MyFile myFile, String subFile) {
         this.path = myFile.path.concat(File.separator).concat(subFile);
         this.name = subFile;
         logger.info(this.toString());
-    }
-
-    private String setName(String path){
-        String[] dirs = path.split(File.separator);
-        return dirs[dirs.length-1];
     }
 
     public MyFile(MyFile myFile, String... subFiles) {

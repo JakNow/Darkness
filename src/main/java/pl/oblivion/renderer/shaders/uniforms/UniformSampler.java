@@ -8,7 +8,7 @@ public class UniformSampler extends Uniform {
         super(name);
     }
 
-    public void loadTextureUnit(int textureUnit){
-        GL20.glUniform1i(super.getLocation(),textureUnit);
+    public void loadTextureUnit(int textureUnit) {
+        GL20.glUniform1i(super.getLocation(), textureUnit);
     }
 }

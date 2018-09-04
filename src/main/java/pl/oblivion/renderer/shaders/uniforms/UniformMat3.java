@@ -6,7 +6,7 @@ import org.lwjgl.opengl.GL20;
 
 import java.nio.FloatBuffer;
 
-public class UniformMat3 extends Uniform{
+public class UniformMat3 extends Uniform {
 
     private FloatBuffer matrixBuffer = BufferUtils.createFloatBuffer(9);
 
@@ -14,9 +14,9 @@ public class UniformMat3 extends Uniform{
         super(name);
     }
 
-    private void loadMat3(Matrix3f matrix3f){
+    private void loadMat3(Matrix3f matrix3f) {
         matrix3f.get(matrixBuffer);
         matrixBuffer.flip();
-        GL20.glUniformMatrix3fv(super.getLocation(),false,matrixBuffer);
+        GL20.glUniformMatrix3fv(super.getLocation(), false, matrixBuffer);
     }
 }

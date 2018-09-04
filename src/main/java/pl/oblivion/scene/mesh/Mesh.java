@@ -22,76 +22,77 @@ public class Mesh {
 
     private MeshData meshData;
 
-    public static Mesh create(MeshData meshData){
-        int id = GL30.glGenVertexArrays();
-        return new Mesh(id,meshData);
-    }
-    private Mesh(int id, MeshData meshData){
+    private Mesh(int id, MeshData meshData) {
         this.id = id;
         this.meshData = meshData;
         this.initMesh();
     }
 
-    private void initMesh(){
+    private void initMesh() {
         this.bind();
         this.createIndexBuffer(meshData.getIndices());
-        this.createAttribute(VertexBuffer.Type.Position,0,meshData.getVertices(),3);
-        this.createAttribute(VertexBuffer.Type.TextureCoords,0,meshData.getTextures(),2);
-        this.createAttribute(VertexBuffer.Type.Normal,0,meshData.getNormals(),3);
+        this.createAttribute(VertexBuffer.Type.Position, 0, meshData.getVertices(), 3);
+        this.createAttribute(VertexBuffer.Type.TextureCoords, 0, meshData.getTextures(), 2);
+        this.createAttribute(VertexBuffer.Type.Normal, 0, meshData.getNormals(), 3);
         this.unbind();
 
     }
 
-    private void bind(){
+    private void bind() {
         GL30.glBindVertexArray(id);
     }
 
-    private void createIndexBuffer(int[] indices){
+    private void createIndexBuffer(int[] indices) {
         this.indexBuffer = VertexBuffer.create(VertexBuffer.Type.Index);
         this.indexBuffer.bind(GL15.GL_ELEMENT_ARRAY_BUFFER);
         this.indexBuffer.storeData(GL15.GL_ELEMENT_ARRAY_BUFFER, indices);
         this.indexCount = indices.length;
     }
 
-    private void createAttribute(VertexBuffer.Type type,int attribute, float[] data, int attributeSize){
+    private void createAttribute(VertexBuffer.Type type, int attribute, float[] data, int attributeSize) {
         VertexBuffer buffer = VertexBuffer.create(type);
         buffer.bind(GL15.GL_ARRAY_BUFFER);
-        buffer.storeData(GL15.GL_ARRAY_BUFFER,data);
-        GL20.glVertexAttribPointer(attribute,attributeSize, GL11.GL_FLOAT,false,attributeSize*BYTES_PER_FLOAT,0);
+        buffer.storeData(GL15.GL_ARRAY_BUFFER, data);
+        GL20.glVertexAttribPointer(attribute, attributeSize, GL11.GL_FLOAT, false, attributeSize * BYTES_PER_FLOAT, 0);
         buffer.unbind(GL15.GL_ARRAY_BUFFER);
-        vertexBufferMap.put(type,buffer);
+        vertexBufferMap.put(type, buffer);
     }
 
-    private void unbind(){
+    private void unbind() {
         GL30.glBindVertexArray(0);
     }
 
-    private void bind(int... attributes){
+    public static Mesh create(MeshData meshData) {
+        int id = GL30.glGenVertexArrays();
+        return new Mesh(id, meshData);
+    }
+
+    private void bind(int... attributes) {
         bind();
         for (int attribute : attributes) {
             GL20.glEnableVertexAttribArray(attribute);
         }
     }
 
-    private void unbind(int... attributes){
+    private void unbind(int... attributes) {
         for (int attribute : attributes) {
             GL20.glDisableVertexAttribArray(attribute);
         }
         unbind();
     }
 
-    private void createAttrivute(VertexBuffer.Type type, int attribute, int[] data, int attributeSize){
+    private void createAttrivute(VertexBuffer.Type type, int attribute, int[] data, int attributeSize) {
         VertexBuffer buffer = VertexBuffer.create(type);
         buffer.bind(GL15.GL_ARRAY_BUFFER);
-        buffer.storeData(GL15.GL_ARRAY_BUFFER,data);
+        buffer.storeData(GL15.GL_ARRAY_BUFFER, data);
         GL30.glVertexAttribIPointer(attribute, attributeSize, GL11.GL_INT, attributeSize * BYTES_PER_INT, 0);
         buffer.unbind(GL15.GL_ARRAY_BUFFER);
         vertexBufferMap.put(type, buffer);
     }
 
-    private void delete(){
+    private void delete() {
         GL30.glDeleteVertexArrays(id);
-        vertexBufferMap.forEach((type,vertexBuffer)->vertexBuffer.delete());
+        vertexBufferMap.forEach((type, vertexBuffer) -> vertexBuffer.delete());
         indexBuffer.delete();
     }
 }

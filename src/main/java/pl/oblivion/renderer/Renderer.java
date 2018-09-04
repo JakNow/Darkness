@@ -10,7 +10,7 @@ public class Renderer {
     private float currentWidth;
     private float currentHeight;
 
-    public Renderer(Window window, Camera camera){
+    public Renderer(Window window, Camera camera) {
         this.window = window;
         this.camera = camera;
     }
@@ -18,7 +18,7 @@ public class Renderer {
 
     public void render() {
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
-        GL11.glClearColor(0,0,0,1.0f);
+        GL11.glClearColor(0, 0, 0, 1.0f);
         GL11.glViewport(0, 0, window.getWidth(), window.getHeight());
         GL11.glEnable(GL11.GL_DEPTH_TEST);
         if (currentWidth != window.getWidth() || currentHeight != window.getHeight()) {
@@ -30,11 +30,11 @@ public class Renderer {
         renderGUI();
     }
 
-    private void renderModels(){
+    private void renderModels() {
 
     }
 
-    private void renderGUI(){
+    private void renderGUI() {
 
     }
 }

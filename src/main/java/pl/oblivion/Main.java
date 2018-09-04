@@ -12,13 +12,13 @@ import static org.lwjgl.opengl.GL11.glViewport;
 
 public class Main {
 
+    private final Renderer renderer;
+    private final Camera camera;
     private Properties properties = AppConfig.loadProperties("src/main/resources/app.properties");
     private final int ups = Integer.parseInt(properties.getProperty("window.display.ups"));
     private final int fps = Integer.parseInt(properties.getProperty("window.display.fps"));
     private Window window;
     private Timer timer;
-    private final Renderer renderer;
-    private final Camera camera;
 
     private Main() {
         window = new Window(properties);

@@ -6,7 +6,7 @@ public class Model extends GameObject {
 
     private SkinnedMesh skinnedMesh;
 
-    public Model(String name, SkinnedMesh skinnedMesh){
+    public Model(String name, SkinnedMesh skinnedMesh) {
         super(name, Model.class);
         this.skinnedMesh = skinnedMesh;
     }

@@ -8,7 +8,7 @@ public class UniformFloat extends Uniform {
         super(name);
     }
 
-    private void loadFloat(float value){
-        GL20.glUniform1f(super.getLocation(),value);
+    private void loadFloat(float value) {
+        GL20.glUniform1f(super.getLocation(), value);
     }
 }

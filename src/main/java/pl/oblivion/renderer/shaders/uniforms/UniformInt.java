@@ -8,7 +8,7 @@ public class UniformInt extends Uniform {
         super(name);
     }
 
-    private void loadInt(int value){
-        GL20.glUniform1i(super.getLocation(),value);
+    private void loadInt(int value) {
+        GL20.glUniform1i(super.getLocation(), value);
     }
 }

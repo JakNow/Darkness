@@ -22,21 +22,21 @@ public abstract class GameObject<T> {
     private List<GameObject> children;
     private GameObject parent;
 
-    public GameObject(String name, T t){
+    public GameObject(String name, T t) {
         this.t = t;
         this.name = name;
         this.transform = new Transform();
         this.children = new LinkedList<>();
     }
 
-    public boolean addChild(GameObject gameObject){
+    public boolean addChild(GameObject gameObject) {
         children.add(gameObject);
         gameObject.setParent(this);
         return true;
     }
 
-    public boolean detachChild(GameObject gameObject){
-        if(gameObject.getParent() == this){
+    public boolean detachChild(GameObject gameObject) {
+        if (gameObject.getParent() == this) {
             children.remove(gameObject);
             gameObject.setParent(null);
             return true;

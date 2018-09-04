@@ -11,22 +11,23 @@ public abstract class Uniform {
     private final String name;
     private int location;
 
-    public Uniform(String name){
+    public Uniform(String name) {
         this.name = name;
         logger = initLogger();
     }
 
-    public void storeUniformLocation(int programId){
-        this.location = GL20.glGetUniformLocation(programId,this.name);
-        if(this.location == NOT_FOUND){
-            logger.error("Couldn't find {} for {}",this.getClass(),this.name);
-        }
-    }
-    private Logger initLogger(){
+    private Logger initLogger() {
         return LogManager.getLogger(this.getClass().getName());
     }
 
-    int getLocation(){
+    public void storeUniformLocation(int programId) {
+        this.location = GL20.glGetUniformLocation(programId, this.name);
+        if (this.location == NOT_FOUND) {
+            logger.error("Couldn't find {} for {}", this.getClass(), this.name);
+        }
+    }
+
+    int getLocation() {
         return location;
     }
 }
