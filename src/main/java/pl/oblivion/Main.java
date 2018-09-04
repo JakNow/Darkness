@@ -1,5 +1,7 @@
 package pl.oblivion;
 
+import pl.oblivion.renderer.Camera;
+import pl.oblivion.renderer.Renderer;
 import pl.oblivion.utils.AppConfig;
 import pl.oblivion.utils.Timer;
 import pl.oblivion.window.Window;
@@ -15,10 +17,14 @@ public class Main {
     private final int fps = Integer.parseInt(properties.getProperty("window.display.fps"));
     private Window window;
     private Timer timer;
+    private final Renderer renderer;
+    private final Camera camera;
 
     private Main() {
         window = new Window(properties);
         timer = new Timer();
+        camera = new Camera(window);
+        renderer = new Renderer(window, camera);
     }
 
     public static void main(String[] args) {
@@ -32,7 +38,7 @@ public class Main {
         float interval = 1f / ups;
 
         while (!window.windowShouldClose()) {
-            glViewport(0,0,window.getWidth(), window.getHeight());
+            glViewport(0, 0, window.getWidth(), window.getHeight());
             elapsedTime = timer.getElapsedTime();
             accumulator += elapsedTime;
 
@@ -61,7 +67,7 @@ public class Main {
     }
 
     private void renderUpdate() {
-        //todo render update
+        renderer.render();
     }
 
     private void sync() {

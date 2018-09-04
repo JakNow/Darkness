@@ -102,7 +102,7 @@ public class Window {
 
     }
 
-    public static Matrix4f updateProjectMatrix(Matrix4f matrix4f, int width, int height) {
+    public Matrix4f updateProjectMatrix(Matrix4f matrix4f, int width, int height) {
         return matrix4f.setPerspective(FOV, (float) width / (float) height, NEAR, FAR);
     }
 
@@ -132,5 +132,13 @@ public class Window {
 
     public int getHeight(){
         return height;
+    }
+
+    public boolean isKeyPressed(int keyCode) {
+        return glfwGetKey(windowId, keyCode) == GLFW_PRESS;
+    }
+
+    public Matrix4f getProjectionMatrix() {
+        return projectionMatrix;
     }
 }

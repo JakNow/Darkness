@@ -1,5 +1,6 @@
 package pl.oblivion.scene;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,13 +12,19 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-public abstract class GameObject {
+public abstract class GameObject<T> {
 
+    private final String name;
+
+    @Getter(AccessLevel.NONE)
+    private final T t;
     private Transform transform;
     private List<GameObject> children;
     private GameObject parent;
 
-    public GameObject(){
+    public GameObject(String name, T t){
+        this.t = t;
+        this.name = name;
         this.transform = new Transform();
         this.children = new LinkedList<>();
     }
