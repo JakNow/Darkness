@@ -2,8 +2,10 @@ package pl.oblivion.renderer.shaders;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.joml.Matrix4f;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
+import pl.oblivion.renderer.Renderer;
 import pl.oblivion.renderer.shaders.uniforms.Uniform;
 
 import java.io.BufferedReader;
@@ -11,17 +13,19 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Properties;
 
 abstract class ShaderProgram {
 
     private static Logger logger;
     private final ShaderType type;
     private int shaderProgramId;
+    private final Properties properties;
 
-
-    ShaderProgram(ShaderType type, String vertexFilePath, String fragmentFilePath, String... inVariables) {
+    ShaderProgram(ShaderType type, String vertexFilePath, String fragmentFilePath, Properties properties,String... inVariables) {
         logger = initLogger();
         this.type = type;
+        this.properties = properties;
         initShader(vertexFilePath, fragmentFilePath, inVariables);
     }
 
@@ -91,5 +95,17 @@ abstract class ShaderProgram {
         }
         GL20.glValidateProgram(shaderProgramId);
     }
+
+    public abstract void loadUniformOnce(Renderer renderer);
+
+    public abstract void startShaderRenderLogic(Renderer renderer, Matrix4f viewMatrix);
+
+    public abstract void prepareMeshUniforms(Object... objects);
+
+    public abstract void prepareModelUniforms(Object... objects);
+
+    public abstract void stopShaderRenderLogic();
+
+    public abstract void connectTextureUnits();
 
 }

@@ -8,7 +8,7 @@ public class UniformBoolean extends Uniform {
         super(name);
     }
 
-    private void loadBoolean(boolean bool) {
+    void loadBoolean(boolean bool) {
         GL20.glUniform1i(super.getLocation(), bool ? 1 : 0);
     }
 }
