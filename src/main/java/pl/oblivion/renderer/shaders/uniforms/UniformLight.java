@@ -1,9 +1,5 @@
 package pl.oblivion.renderer.shaders.uniforms;
 
-import org.joml.Quaternionf;
-import org.joml.Vector3f;
-import pl.oblivion.scene.light.Light;
-
 abstract class UniformLight<T> extends Uniform {
 
     private UniformLightType lightType;

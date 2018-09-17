@@ -1,6 +1,5 @@
 package pl.oblivion.renderer.shaders.uniforms;
 
-import pl.oblivion.scene.light.Light;
 import pl.oblivion.scene.light.LightDirect;
 import pl.oblivion.scene.light.LightType;
 
