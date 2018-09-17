@@ -1,9 +1,9 @@
 package pl.oblivion.renderer.shaders.uniforms;
 
-import pl.oblivion.scene.light.Light;
+import pl.oblivion.scene.light.LightSpot;
 import pl.oblivion.scene.light.LightType;
 
-public class UniformLightSpot extends UniformLight{
+public class UniformLightSpot extends UniformLight<LightSpot>{
 
     private UniformFloat angle;
 
@@ -13,7 +13,7 @@ public class UniformLightSpot extends UniformLight{
     }
 
     @Override
-    void loadLight(Light light) {
-        //todo
+    public void loadLight(LightSpot lightSpot) {
+
     }
 }

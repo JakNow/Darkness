@@ -4,7 +4,7 @@ import org.joml.Quaternionf;
 import org.joml.Vector3f;
 import pl.oblivion.scene.light.Light;
 
-abstract class UniformLight extends Uniform {
+abstract class UniformLight<T> extends Uniform {
 
     private UniformLightType lightType;
     private UniformVec3 position;
@@ -23,5 +23,5 @@ abstract class UniformLight extends Uniform {
         this.intensity = new UniformFloat(name+".intensity");
     }
 
-    abstract void loadLight(Light light);
+    public abstract void loadLight(T t);
 }
